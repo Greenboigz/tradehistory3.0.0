@@ -1,0 +1,105 @@
+.App {
+  text-align: left;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  width:50px;
+  height:50px;
+  pointer-events: none;
+  display: inline-block;
+}
+
+.App-header h1, .App-header h2, .App-header h3, .App-header h4 {
+    display: inline-block;
+} 
+
+.App-link {
+  color: #282c34;
+}
+
+nav {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1040 !important;
+}
+
+.main {
+    margin: 0 auto;
+    padding: 20px 100px;
+    min-height: 100%;
+    max-width: 1200px;
+}
+
+.main img {
+    border: 3px solid #282c34 !important;
+    width: 100% !important;
+    background: white;
+    margin-bottom: 10px;
+}
+
+br {
+    line-height: 40px;
+}
+
+pre code {
+    background-color: #eee;
+    border: 1px solid #999;
+    display: block;
+    padding: 20px;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.center {
+    text-align: center !important;
+    align-content: center !important;
+}
+
+.right {
+    text-align: right !important;
+    align-content: right !important;
+}
+
+.pagination {
+    margin-bottom: 0;
+}
+
+tr.clickable th {
+    cursor: pointer !important;
+}
+
+tr.clickable th:hover {
+    background: #eee;
+}
+
+.loading-page {
+    height: 750px;
+    vertical-align: middle;
+    text-align: center;
+    align-content: center;
+    padding-top: 200px;
+}
+
+.mb-3 {
+    margin-bottom: 0px !important;
+}
+
+.form-group {
+    margin-bottom: 0 !important;
+}
+
+.filter-table tbody th, .filter-table tbody td {
+    border: 0;
+}
+
+.product-page-content {
+    padding-top: 20px;
+}
