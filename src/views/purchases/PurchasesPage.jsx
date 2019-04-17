@@ -19,37 +19,46 @@ class PurchasesPage extends Component {
         this.onRowsDeselected = this.onRowsDeselected.bind(this);
         this.setSort = this.setSort.bind(this);
 
+        this.initializeState(props);
+    }
+
+    initializeState(props) {
+        var purchases = props.purchases || {
+            loading: false,
+            list: [],
+            error: false
+        };
+        var products = props.products || {
+            loading: false,
+            list: [],
+            error: false
+        };
+        var query = {
+            sort: {
+                column: "id",
+                direction: "ASC"
+            },
+            filters: [],
+            page: {
+                currentPage: 1,
+                pageSize: 10
+            }
+        };
+
         this.state = {
-            purchases: props.purchases || {
-                loading: false,
-                list: [],
-                error: false
-            },
-            products: props.products || {
-                loading: false,
-                list: [],
-                error: false
-            },
-            query: {
-                sort: {
-                    column: "id",
-                    direction: "ASC"
-                },
-                filters: [],
-                page: {
-                    currentPage: 1,
-                    pageSize: 10
-                }
-            },
+            purchases,
+            products,
+            query,
             select: [],
-            sortedFilteredList: [],
-            sortedFilteredPaginatedList: []
-        }
+            sortedFilteredList: this.filterAndSortPurchaseList(purchases.list, query),
+            sortedFilteredPaginatedList: this.paginatePurchaseList(purchases.list, query),
+        };
     }
 
     componentWillReceiveProps(nextProps) {
         this.setState({
             purchases: nextProps.purchases,
+            products: nextProps.products,
             sortedFilteredList: this.filterAndSortPurchaseList(nextProps.purchases.list, this.state.query),
             sortedFilteredPaginatedList: this.paginatePurchaseList(nextProps.purchases.list, this.state.query),
         });
@@ -182,7 +191,6 @@ class PurchasesPage extends Component {
                 direction: sortDirection
             }
         };
-        console.log(query);
         var sortedFilteredList = this.filterAndSortPurchaseList(this.state.purchases.list, query);
         this.setState({
             query,
@@ -274,7 +282,7 @@ class PurchasesPage extends Component {
     render() {
         return <div className="main">
             <h1>Purchase History</h1>
-            <PurchasesFilter onSubmit={ this.handleFilter } onChangePageSize={ this.handleChangePageSize } />
+            <PurchasesFilter onSubmit={ this.handleFilter } onChangePageSize={ this.handleChangePageSize } product_list={ this.state.products.list } />
             { (this.state.purchases.loading) ? this.getLoadingMessage() : this.getPurchasesTable() }
         </div>
     }
@@ -297,7 +305,8 @@ function mapStateToProps(state) {
             purchases: {
                 ...state.loadStoreReducer.purchases,
                 list: purchase_list
-            }
+            },
+            products: state.loadStoreReducer.products
         };
     } else {
         return {};

@@ -12,3 +12,23 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+div.css-10nd86i {
+    border: 0;
+    padding: 0;
+}
+
+div.css-vj8t7z {
+    border-radius: 0 3px 3px 0 !important;
+}
+
+div.css-2o5izw {
+    border-radius: 0 3px 3px 0 !important;
+    color:#495057;
+    background-color:#fff;
+    border-color:#80bdff;
+    outline:0;
+    box-shadow:0 0 0 .2rem rgba(0,123,255,.25)
+}
+
+

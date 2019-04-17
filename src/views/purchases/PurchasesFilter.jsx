@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Table, InputGroup, Button, Form, ButtonGroup, DropdownButton, Dropdown, ButtonToolbar } from 'react-bootstrap';
+import Select from 'react-select';
 import _ from 'lodash';
+import { prototype } from 'stream';
 
 const DEFAULT_FILTERS = {
-    name: "",
+    product: {},
     minQuantity: "",
     maxQuantity: "",
     minCost: "",
@@ -19,6 +21,7 @@ class PurchasesFilter extends Component {
 
         this.state = {
             onSubmit: props.onSubmit,
+            product_list: props.product_list,
             filters: DEFAULT_FILTERS,
             pageSize: 10,
             changed: false
@@ -36,15 +39,31 @@ class PurchasesFilter extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            product_list: nextProps.product_list,
+            onSubmit: nextProps.onSubmit
+        });
+    }
+
+    getProductOptions() {
+        return this.state.product_list.map(product => {
+            return {
+                value: product.name,
+                label: product.name
+            }
+        });
+    }
+
     isFilterClearable() {
         return !_.isEqual(DEFAULT_FILTERS, this.state.filters);
     }
 
-    handleNameChange(event) {
+    handleNameChange(product_option) {
         this.setState({
             filters: {
                 ...this.state.filters,
-                name: event.target.value
+                product: product_option
             },
             changed: true
         });
@@ -124,37 +143,37 @@ class PurchasesFilter extends Component {
 
     getFilters() {
         var filters = [];
-        if (this.state.filters.name !== "") {
+        if (this.state.filters.product && this.state.filters.product.value) {
             filters.push(purchase => {
-                return purchase.productName.includes(this.state.filters.name);
+                return purchase.productName == this.state.filters.product.value;
             });
         }
-        if (this.state.filters.minQuantity !== "") {
+        if (this.state.filters.minQuantity) {
             filters.push(purchase => {
                 return purchase.quantity >= parseInt(this.state.filters.minQuantity);
             });
         }
-        if (this.state.filters.maxQuantity !== "") {
+        if (this.state.filters.maxQuantity) {
             filters.push(purchase => {
                 return purchase.quantity <= parseInt(this.state.filters.maxQuantity);
             });
         }
-        if (this.state.filters.minCost !== "") {
+        if (this.state.filters.minCost) {
             filters.push(purchase => {
                 return purchase.purchaseCost >= parseInt(this.state.filters.minCost);
             });
         }
-        if (this.state.filters.maxCost !== "") {
+        if (this.state.filters.maxCost) {
             filters.push(purchase => {
                 return purchase.purchaseCost <= parseInt(this.state.filters.maxCost);
             });
         }
-        if (this.state.filters.minDate !== "") {
+        if (this.state.filters.minDate) {
             filters.push(purchase => {
                 return purchase.purchaseDate >= Date.parse(this.state.filters.minDate);
             });
         }
-        if (this.state.filters.maxDate !== "") {
+        if (this.state.filters.maxDate) {
             filters.push(purchase => {
                 return purchase.purchaseDate <= Date.parse(this.state.filters.maxDate);
             });
@@ -201,8 +220,13 @@ class PurchasesFilter extends Component {
                                     <InputGroup.Prepend id="value">
                                         <InputGroup.Text>Product Name</InputGroup.Text>
                                     </InputGroup.Prepend>
-                                    <Form.Control placeholder="Product Name" type="text" 
-                                        value={ this.state.filters.name } onChange={ this.handleNameChange } />
+                                    <Select className="form-control"
+                                        value={ this.state.filters.name } 
+                                        isSearchable={ true }
+                                        isClearable={ true }
+                                        placeholder="Product Name" 
+                                        onChange={ this.handleNameChange }
+                                        options={ this.getProductOptions() } />
                                 </InputGroup>
                             </td>
                             <td>
