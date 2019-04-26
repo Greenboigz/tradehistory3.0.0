@@ -1,6 +1,6 @@
 const INITIAL_STATE = {
-    products: [],
-    purchases: []
+    products: { list: [], loading: false, error: null },
+    purchases: { list: [], loading: false, error: null }
 }
 
 export default (state = INITIAL_STATE, action) => {

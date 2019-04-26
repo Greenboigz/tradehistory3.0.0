@@ -22,6 +22,10 @@ div.css-vj8t7z {
     border-radius: 0 3px 3px 0 !important;
 }
 
+div.css-vj8t7z:hover {
+    border-color: rgb(206, 212, 218);
+}
+
 div.css-2o5izw {
     border-radius: 0 3px 3px 0 !important;
     color:#495057;

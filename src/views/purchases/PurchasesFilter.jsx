@@ -5,7 +5,7 @@ import _ from 'lodash';
 import { prototype } from 'stream';
 
 const DEFAULT_FILTERS = {
-    product: {},
+    product: null,
     minQuantity: "",
     maxQuantity: "",
     minCost: "",
@@ -21,12 +21,14 @@ class PurchasesFilter extends Component {
 
         this.state = {
             onSubmit: props.onSubmit,
-            product_list: props.product_list,
+            products: props.products || { list: [], loading: false },
             filters: DEFAULT_FILTERS,
             pageSize: 10,
             changed: false
         }
 
+        this.getLoadingMessage = this.getLoadingMessage.bind(this);
+        
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleMinQuantityChange = this.handleMinQuantityChange.bind(this);
         this.handleMaxQuantityChange = this.handleMaxQuantityChange.bind(this);
@@ -41,18 +43,25 @@ class PurchasesFilter extends Component {
 
     componentWillReceiveProps(nextProps) {
         this.setState({
-            product_list: nextProps.product_list,
+            products: nextProps.products || { list: [], loading: false },
             onSubmit: nextProps.onSubmit
         });
     }
 
     getProductOptions() {
-        return this.state.product_list.map(product => {
+        return this.state.products.list.map(product => {
             return {
                 value: product.name,
                 label: product.name
             }
         });
+    }
+
+    getLoadingMessage() {
+        if (this.state.products.loading) {
+            return "Loading products...";
+        }
+        return null;
     }
 
     isFilterClearable() {
@@ -221,11 +230,13 @@ class PurchasesFilter extends Component {
                                         <InputGroup.Text>Product Name</InputGroup.Text>
                                     </InputGroup.Prepend>
                                     <Select className="form-control"
-                                        value={ this.state.filters.name } 
+                                        value={ this.state.filters.product } 
                                         isSearchable={ true }
                                         isClearable={ true }
                                         placeholder="Product Name" 
                                         onChange={ this.handleNameChange }
+                                        loadingMessage={ this.getLoadingMessage }
+                                        isLoading={ this.state.products.loading }
                                         options={ this.getProductOptions() } />
                                 </InputGroup>
                             </td>

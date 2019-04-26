@@ -82,8 +82,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         initStore: () => { 
-            LoadProductsDispatcher(dispatch);
-            LoadPurchasesDispatcher(dispatch);
+            dispatch(LoadProductsDispatcher());
+            dispatch(LoadPurchasesDispatcher());
         }
     }
 }

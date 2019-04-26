@@ -57,8 +57,16 @@ class PurchasesPage extends Component {
 
     componentWillReceiveProps(nextProps) {
         this.setState({
-            purchases: nextProps.purchases,
-            products: nextProps.products,
+            purchases: nextProps.purchases || {
+                loading: false,
+                list: [],
+                error: false
+            },
+            products: nextProps.products || {
+                loading: false,
+                list: [],
+                error: false
+            },
             sortedFilteredList: this.filterAndSortPurchaseList(nextProps.purchases.list, this.state.query),
             sortedFilteredPaginatedList: this.paginatePurchaseList(nextProps.purchases.list, this.state.query),
         });
@@ -282,7 +290,7 @@ class PurchasesPage extends Component {
     render() {
         return <div className="main">
             <h1>Purchase History</h1>
-            <PurchasesFilter onSubmit={ this.handleFilter } onChangePageSize={ this.handleChangePageSize } product_list={ this.state.products.list } />
+            <PurchasesFilter onSubmit={ this.handleFilter } onChangePageSize={ this.handleChangePageSize } products={ this.state.products } />
             { (this.state.purchases.loading) ? this.getLoadingMessage() : this.getPurchasesTable() }
         </div>
     }
@@ -290,9 +298,10 @@ class PurchasesPage extends Component {
 }
 
 function mapStateToProps(state) {
+    var purchase_list = [];
     if (state.loadStoreReducer.purchases && state.loadStoreReducer.purchases.list) {
         const getProduct = id => state.loadStoreReducer.products.list.find(product => product.id === id);
-        const purchase_list = state.loadStoreReducer.purchases.list.map(purchase => {
+        purchase_list = state.loadStoreReducer.purchases.list.map(purchase => {
             const product = getProduct(purchase.productId);
             return {
                 ...purchase,
@@ -301,16 +310,15 @@ function mapStateToProps(state) {
                 purchaseCost: product.value * purchase.quantity
             }
         });
-        return {
-            purchases: {
-                ...state.loadStoreReducer.purchases,
-                list: purchase_list
-            },
-            products: state.loadStoreReducer.products
-        };
-    } else {
-        return {};
     }
+
+    return {
+        purchases: {
+            ...state.loadStoreReducer.purchases,
+            list: purchase_list
+        },
+        products: state.loadStoreReducer.products
+    };
 }
 
 function mapDispatchToProps(dispatch) {
