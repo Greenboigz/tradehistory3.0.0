@@ -1,12 +1,16 @@
-const INITIAL_STATE = {
-    products: { list: [], loading: false, error: null },
-    purchases: { list: [], loading: false, error: null }
+import actions from '../constants/ActionTypes'
+
+export const INITIAL_STATE = () => { return {
+        products: { list: [], loading: false, error: null },
+        purchases: { list: [], loading: false, error: null }
+    }
 }
 
-export default (state = INITIAL_STATE, action) => {
+export default (state = INITIAL_STATE(), action) => {
     var result = state;
+
     switch (action.type) {
-        case 'LOAD_PRODUCTS':
+        case actions.LOAD_PRODUCTS:
             result = {
                 ...state,
                 products: {
@@ -16,7 +20,7 @@ export default (state = INITIAL_STATE, action) => {
                 }
             };
             break;
-        case 'LOAD_PRODUCTS_SUCCESS':
+        case actions.LOAD_PRODUCTS_SUCCESS:
             result = {
                 ...state,
                 products: {
@@ -26,7 +30,7 @@ export default (state = INITIAL_STATE, action) => {
                 }
             };
             break;
-        case 'LOAD_PRODUCTS_FAILURE':
+        case actions.LOAD_PRODUCTS_FAILURE:
             result = {
                 ...state,
                 products: {
@@ -36,7 +40,7 @@ export default (state = INITIAL_STATE, action) => {
                 }
             };
             break;
-        case 'LOAD_PURCHASES':
+        case actions.LOAD_PURCHASES:
             result = {
                 ...state,
                 purchases: {
@@ -46,7 +50,7 @@ export default (state = INITIAL_STATE, action) => {
                 }
             };
             break;
-        case 'LOAD_PURCHASES_SUCCESS':
+        case actions.LOAD_PURCHASES_SUCCESS:
             result = {
                 ...state,
                 purchases: {
@@ -56,7 +60,7 @@ export default (state = INITIAL_STATE, action) => {
                 }
             };
             break;
-        case 'LOAD_PURCHASES_FAILURE':
+        case actions.LOAD_PURCHASES_FAILURE:
             result = {
                 ...state,
                 purchases: {

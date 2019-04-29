@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Table, Pagination } from 'react-bootstrap';
-import icons from 'glyphicons';
+import { Pagination } from 'react-bootstrap';
 import dateformat from 'dateformat';
 import ClipLoader from 'react-spinners/ClipLoader';
 import PurchasesFilter from './PurchasesFilter';
@@ -19,7 +18,7 @@ class PurchasesPage extends Component {
         this.onRowsDeselected = this.onRowsDeselected.bind(this);
         this.setSort = this.setSort.bind(this);
 
-        this.initializeState(props);
+        this.state = this.initializeState(props);
     }
 
     initializeState(props) {
@@ -45,7 +44,7 @@ class PurchasesPage extends Component {
             }
         };
 
-        this.state = {
+        return {
             purchases,
             products,
             query,

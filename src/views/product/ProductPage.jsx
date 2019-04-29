@@ -4,7 +4,6 @@ import { Table, Nav } from 'react-bootstrap';
 import PurchasesTable from './PurchasesTable';
 import dateformat from 'dateformat';
 import ClipLoader from 'react-spinners/ClipLoader';
-import { LineChart } from 'react-d3-components';
 import { EXPERIMENT_START_DATE, A_DAY } from '../../helpers/helper';
 
 class ProductPage extends Component {

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Table, InputGroup, Button, Form, ButtonGroup, DropdownButton, Dropdown, ButtonToolbar } from 'react-bootstrap';
 import Select from 'react-select';
 import _ from 'lodash';
-import { prototype } from 'stream';
 
 const DEFAULT_FILTERS = {
     product: null,
@@ -154,7 +153,7 @@ class PurchasesFilter extends Component {
         var filters = [];
         if (this.state.filters.product && this.state.filters.product.value) {
             filters.push(purchase => {
-                return purchase.productName == this.state.filters.product.value;
+                return purchase.productName === this.state.filters.product.value;
             });
         }
         if (this.state.filters.minQuantity) {

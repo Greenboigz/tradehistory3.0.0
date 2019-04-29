@@ -9,11 +9,7 @@ import actions from '../constants/ActionTypes';
 export function LoadProductsDispatcher() {
     return dispatch => {
         dispatch(LoadProducts());
-        const headers = {
-            method: 'GET',
-            'Access-Control-Allow-Credentials': 'true'
-        }
-        return request.getData('http://localhost:5000/products', headers)
+        return request.getData('http://localhost:5000/products')
             .then(body => { 
                 dispatch(LoadProductsSuccess(body.products))
             })
@@ -74,9 +70,9 @@ function LoadPurchasesFailure(error) {
     }
 }
 
-function UpdatePurchases(purchases) {
-    return {
-        type: actions.UPDATE_PURCHASES,
-        payload: { purchases }
-    }
-}
+// function UpdatePurchases(purchases) {
+//     return {
+//         type: actions.UPDATE_PURCHASES,
+//         payload: { purchases }
+//     }
+// }

@@ -13,7 +13,7 @@ import PurchasesPage from './views/purchases/PurchasesPage';
 import ReactPage from './views/faq/ReactPage';
 import ReduxPage from './views/faq/ReduxPage';
 
-import './App.css';
+import './style/App.css';
 
 class App extends Component {
 
