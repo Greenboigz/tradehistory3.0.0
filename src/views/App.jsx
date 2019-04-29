@@ -3,17 +3,17 @@ import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 
-import logo from './logo.svg';
-import { LoadProductsDispatcher, LoadPurchasesDispatcher } from './actions/loadStoreActions';
-import Home from './views/Home';
-import WebHistoryPage from './views/faq/WebHistoryPage';
-import ProductsPage from './views/products/ProductsPage';
-import ProductPage from './views/product/ProductPage';
-import PurchasesPage from './views/purchases/PurchasesPage';
-import ReactPage from './views/faq/ReactPage';
-import ReduxPage from './views/faq/ReduxPage';
+import logo from '../logo.svg';
+import { LoadProductsDispatcher, LoadPurchasesDispatcher } from '../actions/loadStoreActions';
+import Home from './Home';
+import WebHistoryPage from './faq/WebHistoryPage';
+import ProductsPage from './products/ProductsPage';
+import ProductPage from './product/ProductPage';
+import PurchasesPage from './purchases/PurchasesPage';
+import ReactPage from './faq/ReactPage';
+import ReduxPage from './faq/ReduxPage';
 
-import './style/App.css';
+import '../css/App.css';
 
 class App extends Component {
 
@@ -30,7 +30,6 @@ class App extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log("componentWillReceiveProps");
         this.setState({
             products: nextProps.products
         });
