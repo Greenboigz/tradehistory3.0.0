@@ -6,7 +6,7 @@ import ClipLoader from 'react-spinners/ClipLoader';
 import PurchasesFilter from './PurchasesFilter';
 import ReactDataGrid from 'react-data-grid';
 
-class PurchasesPage extends Component {
+export class PurchasesPage extends Component {
 
     constructor(props) {
         super(props);

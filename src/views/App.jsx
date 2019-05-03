@@ -15,7 +15,7 @@ import ReduxPage from './faq/ReduxPage';
 
 import '../css/App.css';
 
-class App extends Component {
+export class App extends Component {
 
     constructor(props) {
         super(props);
@@ -26,7 +26,8 @@ class App extends Component {
     }
 
     componentWillMount() {
-        this.props.initStore();
+        if (this.props.initStore)
+            this.props.initStore();
     }
 
     componentWillReceiveProps(nextProps) {

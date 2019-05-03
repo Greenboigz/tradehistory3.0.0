@@ -7,7 +7,7 @@ import ClipLoader from 'react-spinners/ClipLoader';
 import ProductsFilter from './ProductsFilter';
 import { withRouter } from 'react-router-dom';
 
-class ProductsPage extends Component {
+export class ProductsPage extends Component {
 
     constructor(props) {
         super(props);

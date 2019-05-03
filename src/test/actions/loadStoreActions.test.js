@@ -1,9 +1,9 @@
-import configureMockStore from 'redux-mock-store'
-import thunk from 'redux-thunk'
-import * as actions from '../../actions/loadStoreActions'
-import types from '../../constants/ActionTypes'
-import fetchMock from 'fetch-mock'
-import expect from 'expect' // You can use any testing library
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import * as actions from '../../actions/loadStoreActions';
+import types from '../../constants/ActionTypes';
+import fetchMock from 'fetch-mock';
+import expect from 'expect';
 
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)

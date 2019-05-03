@@ -203,6 +203,8 @@ class PurchasesFilter extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        console.log("Submitting...");
+        console.log("\n\n\n\n\n\n\n");
         this.state.onSubmit({
             filters: this.getFilters(),
             pageSize: this.state.pageSize
@@ -225,7 +227,7 @@ class PurchasesFilter extends Component {
                         <tr>
                             <td>
                                 <InputGroup className="mb-3">
-                                    <InputGroup.Prepend id="value">
+                                    <InputGroup.Prepend>
                                         <InputGroup.Text>Product Name</InputGroup.Text>
                                     </InputGroup.Prepend>
                                     <Select className="form-control"
@@ -241,12 +243,12 @@ class PurchasesFilter extends Component {
                             </td>
                             <td>
                                 <InputGroup className="mb-3">
-                                    <InputGroup.Prepend id="value">
+                                    <InputGroup.Prepend>
                                         <InputGroup.Text>Purchase Date</InputGroup.Text>
                                     </InputGroup.Prepend>
-                                    <Form.Control placeholder="Minimum Date" type="date" 
+                                    <Form.Control placeholder="Minimum Date" type="date" id="min-date"
                                         value={ this.state.filters.minDate } onChange={ this.handleMinDateChange } />
-                                    <Form.Control placeholder="Maximum Date" type="date" 
+                                    <Form.Control placeholder="Maximum Date" type="date" id="max-date"
                                         value={ this.state.filters.maxDate } onChange={ this.handleMaxDateChange } />
                                 </InputGroup>
                             </td>
@@ -254,23 +256,23 @@ class PurchasesFilter extends Component {
                         <tr>
                             <td>
                                 <InputGroup className="mb-3">
-                                    <InputGroup.Prepend id="value">
+                                    <InputGroup.Prepend>
                                         <InputGroup.Text>Quantity</InputGroup.Text>
                                     </InputGroup.Prepend>
-                                    <Form.Control placeholder="Minimum Quantity" type="number" 
+                                    <Form.Control placeholder="Minimum Quantity" type="number" id="min-quantity"
                                         value={ this.state.filters.minQuantity } onChange={ this.handleMinQuantityChange } />
-                                    <Form.Control placeholder="Maximum Quantity" type="number" 
+                                    <Form.Control placeholder="Maximum Quantity" type="number" id="max-quantity"
                                         value={ this.state.filters.maxQuantity } onChange={ this.handleMaxQuantityChange } />
                                 </InputGroup>
                             </td>
                             <td>
                             <InputGroup className="mb-3">
-                                    <InputGroup.Prepend id="value">
+                                    <InputGroup.Prepend>
                                         <InputGroup.Text>Cost</InputGroup.Text>
                                     </InputGroup.Prepend>
-                                    <Form.Control placeholder="Minimum Cost" type="number" 
+                                    <Form.Control placeholder="Minimum Cost" type="number" id="min-cost"
                                         value={ this.state.filters.minCost } onChange={ this.handleMinCostChange } />
-                                    <Form.Control placeholder="Maximum Cost" type="number" 
+                                    <Form.Control placeholder="Maximum Cost" type="number" id="max-cost"
                                         value={ this.state.filters.maxCost } onChange={ this.handleMaxCostChange } />
                                 </InputGroup>
                             </td>
@@ -281,7 +283,7 @@ class PurchasesFilter extends Component {
                             <td colSpan={2}>
                             <ButtonToolbar className="justify-content-between">
                                 <ButtonGroup>
-                                    <Button variant="primary" disabled={ !this.state.changed } type="Submit">Search</Button>
+                                    <Button id="filter-submit" variant="primary" disabled={ !this.state.changed } type="Submit">Search</Button>
                                     <DropdownButton variant="outline-secondary" as={ButtonGroup} title={this.state.pageSize} onSelect={this.handlePageSizeChange}>
                                         <Dropdown.Item eventKey="10">10</Dropdown.Item>
                                         <Dropdown.Item eventKey="20">20</Dropdown.Item>
@@ -289,7 +291,7 @@ class PurchasesFilter extends Component {
                                         <Dropdown.Item eventKey="100">100</Dropdown.Item>
                                     </DropdownButton>
                                 </ButtonGroup>
-                                <Button variant="danger" onClick={ this.handleClearFilter } disabled={ !this.isFilterClearable() }>
+                                <Button id="filter-clear" variant="danger" onClick={ this.handleClearFilter } disabled={ !this.isFilterClearable() }>
                                     Clear
                                 </Button>
                             </ButtonToolbar>
