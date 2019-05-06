@@ -18,8 +18,10 @@ class PurchasesFilter extends Component {
     constructor(props) {
         super(props);
 
+        const defaultOnSubmit = () => {};
+
         this.state = {
-            onSubmit: props.onSubmit,
+            onSubmit: props.onSubmit || defaultOnSubmit,
             products: props.products || { list: [], loading: false },
             filters: DEFAULT_FILTERS,
             pageSize: 10,
@@ -203,15 +205,15 @@ class PurchasesFilter extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        console.log("Submitting...");
-        console.log("\n\n\n\n\n\n\n");
-        this.state.onSubmit({
-            filters: this.getFilters(),
-            pageSize: this.state.pageSize
-        });
-        this.setState({
-            changed: false
-        })
+        if (this.state.changed) {
+            this.state.onSubmit({
+                filters: this.getFilters(),
+                pageSize: this.state.pageSize
+            });
+            this.setState({
+                changed: false
+            });
+        }
     }
 
     render() {
