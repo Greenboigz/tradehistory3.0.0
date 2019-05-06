@@ -102,7 +102,7 @@ describe('Tests the functionality of the purchases/PurchasesFilter component', (
     ])(
         'Tests the functionality of the filter input field "%s" with value "%s"',
         (id, value, expected_ids) => {
-            test('Does include the filter values when the filter is edited in the search onSubmit callback.', () => {
+            test('Does properly filter the purchases during the search onSubmit callback.', () => {
                 mockOnSubmit = (query) => {
                     let filtered_purchases = purchases_list.filter(purchase => {
                         var include = true;
